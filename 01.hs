@@ -12,6 +12,6 @@ sums = map sum . foldr get [[]]
 main :: IO ()
 main = do
   content <- getContents --readFile "input.txt"
-  let s = sums . lines $ content
-  let top3 = negate . sum . take 3 . sort . map negate $ s
+  let s    = sums . lines $ content
+      top3 = negate . sum . take 3 . sort . map negate $ s
   printf "Part 1: %d, Part 2: %d\n" (maximum s) top3

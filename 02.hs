@@ -16,6 +16,6 @@ main :: IO ()
 main = do
   content <- getContents --readFile "input.txt"
   let ls = map (filter (/=' ')) $ lines content
-  let s1 = sum $ map score ls
-  let s2 = sum $ map (score . pick) ls
+      s1 = sum $ map score ls
+      s2 = sum $ map (score . pick) ls
   printf "Part 1: %d, Part 2: %d\n" s1 s2
