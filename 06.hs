@@ -12,4 +12,4 @@ marker _ _ = 0
 main :: IO ()
 main = do
   xs <- getContents -- readFile "input.txt"
-  printf "Part 1: %d\n, Part 2: %d\n" (marker 4 xs) (marker 14 xs)
+  printf "Part 1: %d, Part 2: %d\n" (marker 4 xs) (marker 14 xs)
