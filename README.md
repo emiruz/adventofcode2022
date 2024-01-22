@@ -21,6 +21,7 @@ cat input.txt | ./01
 Please install the following packages. They help to
 keep the code concise.
 ```
-cabal install --libs lens
-cabal install --libs regex-pcre
+cabal install --lib lens
+cabal install --lib regex-pcre
+cabal install --lib containers
 ```
