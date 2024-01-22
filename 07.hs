@@ -1,9 +1,9 @@
 #!/usr/bin/env runhaskell
 
-import Data.Char(isDigit)
-import Text.Printf(printf)
-import Data.List(sort, groupBy, tails)
-import Data.Function (on)
+import Data.Char (isDigit)
+import Text.Printf (printf)
+import Data.List (sort, tails)
+import Data.Map (fromListWith, toList)
 
 unfold :: [String] -> [String] -> [([String], Int)]
 unfold (x@(a:_):xs) ys
@@ -14,17 +14,16 @@ unfold (x@(a:_):xs) ys
 unfold _ _ = []
 
 expand :: [([a], b)] -> [([a], b)]
-expand xs = [(y,v) | (x,v) <- xs, y <- tails x, not (null y)]
+expand xs = [(y, v) | (x, v) <- xs, y <- tails x, not (null y)]
 
-groups :: (Num b1, Ord b2, Ord b1) => [(b2, b1)] -> [(b2, b1)]
-groups xs = map sums $ groupBy (on (==) fst) $ sort xs
-  where sums grp = (fst $ head grp, sum $ map snd grp)
+group :: (Ord k, Num a) => [(k, a)] -> [(k, a)]
+group xs = toList $ fromListWith (+) xs
 
 main :: IO ()
 main = do
-  str <- getContents -- readFile "input.txt"
-  let sizes = sort . map snd . groups . expand $ unfold (lines str) []
+  str <- getContents -- or readFile "input.txt"
+  let sizes = sort . map snd . group . expand $ unfold (lines str) []
       smallDirs = sum . filter (<= 100000) $ sizes
-      target =  (maximum sizes) + 30000000 - 70000000
+      target = (maximum sizes) + 30000000 - 70000000
       targetSize = head $ filter (>= target) sizes
   printf "Part 1: %d, Part 2: %d\n" smallDirs targetSize
