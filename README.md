@@ -18,8 +18,9 @@ cat input.txt | ./01
 
 ## Prerequisites
 
-Please install the "lens" package. It helps keep the
-code concise.
+Please install the following packages. They help to
+keep the code concise.
 ```
 cabal install --libs lens
+cabal install --libs regex-pcre
 ```
