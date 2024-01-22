@@ -15,3 +15,11 @@ Compiled and then executed:
 ghc 01.hs
 cat input.txt | ./01
 ```
+
+## Prerequisites
+
+Please install the "lens" package. It helps keep the
+code concise.
+```
+cabal install --libs lens
+```
