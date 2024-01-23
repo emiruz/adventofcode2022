@@ -1,7 +1,5 @@
 #!/usr/bin/env runhaskell
 
-{-# OPTIONS_GHC -Wall #-}
-
 import Data.List(nub,transpose)
 import Data.Char(digitToInt)
 import Text.Printf (printf)
@@ -24,7 +22,7 @@ view _ = []
 
 main :: IO ()
 main = do
-  str <- readFile "input.txt"
+  str <- getContents -- readFile "input.txt"
   let coo      = grid str
       viz' x   = nub $ (viz x (-1)) ++ (viz (reverse x) (-1))
       view' x  = view x ++ view (reverse x)
