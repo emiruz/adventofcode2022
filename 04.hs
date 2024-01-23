@@ -4,9 +4,6 @@ import Data.List(intersect)
 import Data.Char(isDigit)
 import Text.Printf(printf)
 
-norm :: String -> [Int]
-norm = map read . words . map (\x -> if isDigit x then x else ' ')
-
 subsume :: [Int] -> Int
 subsume ns@[a,b,c,d] | (mn,mx) == (a,b) || (mn,mx) == (c,d) = 1
                      | otherwise = 0
@@ -20,7 +17,8 @@ overlap _         = 0
 main :: IO ()
 main = do
   content <- getContents -- readFile "input.txt"
-  let ls   = map norm $ lines content
+  let norm = map read . words . map (\x -> if isDigit x then x else ' ')
+      ls   = map norm $ lines content
       s1   = sum $ map subsume ls
       s2   = length $ filter (>0) $ map overlap ls
   printf "Part 1: %d, Part 2: %d\n" s1 s2
