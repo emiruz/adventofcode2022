@@ -13,16 +13,12 @@ unfold (x@(a:_):xs) ys
   | otherwise = unfold xs ys
 unfold _ _ = []
 
-expand :: [([a], b)] -> [([a], b)]
-expand xs = [(y, v) | (x, v) <- xs, y <- tails x, not (null y)]
-
-group :: (Ord k, Num a) => [(k, a)] -> [(k, a)]
-group xs = toList $ fromListWith (+) xs
-
 main :: IO ()
 main = do
   str <- getContents -- or readFile "input.txt"
-  let sizes = sort . map snd . group . expand $ unfold (lines str) []
+  let expand xs = [(y, v) | (x, v) <- xs, y <- tails x, not (null y)]
+      group xs = toList $ fromListWith (+) xs
+      sizes = sort . map snd . group . expand $ unfold (lines str) []
       smallDirs = sum . filter (<= 100000) $ sizes
       target = (maximum sizes) + 30000000 - 70000000
       targetSize = head $ filter (>= target) sizes
