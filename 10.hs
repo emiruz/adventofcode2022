@@ -3,8 +3,7 @@
 import Text.Printf (printf)
 
 parse :: [String] -> [(Int,Int)]
-parse ls =
-  zip (scanl (+) 1 [x | (x,_) <- ws]) (scanl (+) 1 [y | (_,y) <- ws])
+parse ls = zip (scanl (+) 1 [x | (x,_) <- ws]) (scanl (+) 1 [y | (_,y) <- ws])
   where ws = map (p' . words) ls
         p' ["addx",n] = (2,read n :: Int)
         p' _          = (1,0)
