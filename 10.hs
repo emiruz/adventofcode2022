@@ -1,9 +1,10 @@
 #!/usr/bin/env runhaskell
 
 import Text.Printf (printf)
+import Data.Biapplicative (biliftA2)
 
 parse :: [String] -> [(Int,Int)]
-parse ls = zip (scanl (+) 1 [x | (x,_) <- ws]) (scanl (+) 1 [y | (_,y) <- ws])
+parse ls = scanl (biliftA2 (+) (+)) (1, 1) ws
   where ws = map (p' . words) ls
         p' ["addx",n] = (2,read n :: Int)
         p' _          = (1,0)
