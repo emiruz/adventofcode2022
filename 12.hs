@@ -16,17 +16,20 @@ main = do
 
       val x | x=='S' = -(ord 'a') | x=='E' = -(ord 'z') | otherwise = -(ord x)
 
-      q g f (x, y)  = maybe 1000 f $ M.lookup ((x-1)*n+y) g
+      q g f (x,y)  = maybe 1000 f $ M.lookup ((x-1)*n+y) g
+      q' g i = maybe 1000 id $ M.lookup i g
 
       adj (x,y) = filter (\p->v0-1 <= q grid val p) opts
         where v0 = q grid val (x,y)
               opts = map (\(a,b)->(x+a,b+y)) [(1,0),(-1,0),(0,1),(0,-1)]
 
+      adj' = zip [1..] (map adj ps)
+  
       start = M.insert (1+ei 'E') 0 $ M.fromList $ zip [1..] $ replicate (n*m) 1000
 
       paths vs | vs' == vs = vs | otherwise = paths vs'
-        where vs' = M.fromList $ zip [1..] $ map ff ps
-              ff p = minimum $ q vs id p:(map ((+1).(q vs id)) $ adj p)
+        where vs' = M.fromList $ zip [1..] $ map ff adj'
+              ff (i,a) = minimum $ q' vs i:(map ((+1).(q vs id)) a)
 
       solve = paths start
       part1 = maybe 0 id $ M.lookup (1+ei 'S') solve
