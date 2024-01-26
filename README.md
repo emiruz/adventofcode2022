@@ -24,3 +24,14 @@ keep the code concise.
 cabal install --lib lens regex-pcre containers \
                     bifunctors-5.6.1
 ```
+
+## Notes
+
+* Day 12: Lots of good options Dijkstra, A*, Bellman-Ford,
+Floyd Warshall, and so on, but they are boring. I went for
+a custom dynamic programming solution as a code golfing
+exercise. Its slow (3.5 sec compiled, ~12 sec interpreted)
+but mostly because it needs a mutable array since it does
+a lot of updating. The $map$ in the $path$ function
+should be a $foldl$ but its much slower without a mutable
+array.
