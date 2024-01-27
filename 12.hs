@@ -27,7 +27,7 @@ main = do
 
       paths vs | chg==0 = vs | otherwise = paths vs'
         where (chg, vs') = foldl' (\acc y@(v0,(i,_))-> upd acc i (ff y) v0) (0,vs) (zip (M.elems vs) adj')
-              upd (chg, acc) i v v0 = if v /= v0 then (1, M.insert i v acc) else (max chg 0, acc)
+              upd (chg, acc) i v v0 = if v /= v0 then (1, M.insert i v acc) else (chg, acc)
               ff (v0,(_,a)) = minimum $ v0:(map ((+1).(q vs id)) a)
 
       solve = paths start
