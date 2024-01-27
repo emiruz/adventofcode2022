@@ -22,7 +22,7 @@ Please install the following packages. They help to
 keep the code concise.
 ```
 cabal install --lib lens regex-pcre containers \
-                    bifunctors-5.6.1
+                    bifunctors-5.6.1 aeson bytestring
 ```
 
 ## Notes
@@ -30,6 +30,8 @@ cabal install --lib lens regex-pcre containers \
 * Day 12: Lots of good options Dijkstra, A*, Bellman-Ford,
 Floyd Warshall, and so on, but they are boring. I went for
 a custom dynamic programming solution as a code golfing
-exercise. Its slow (2.2 sec compiled, ~12 sec interpreted)
-but mostly because it needs a mutable array since it does
-a lot of updating.
+exercise. The speed is now ok after several performance
+modifications (0.7sec compiled with ghc -O2, ~10 sec
+interpreted). Its mostly held back by the large number
+of updates on an IntMap. Still one or two simple
+optimisations to add though.
