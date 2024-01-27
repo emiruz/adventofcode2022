@@ -25,9 +25,9 @@ main = do
       adj'  = zip [1..] (map adj ps)
       start = M.insert (1+ei 'E') 0 $ M.fromList $ zip [1..] $ replicate (n*m) 1000
 
-      paths vs | vs' == vs = vs | otherwise = paths vs'
-        where vs' = foldl' (\acc y@(v0,(i,_))-> upd acc i (ff y) v0) vs (zip (M.elems vs) adj')
-              upd acc i v v0 = if v /= v0 then M.insert i v acc else acc
+      paths vs | chg==0 = vs | otherwise = paths vs'
+        where (chg, vs') = foldl' (\acc y@(v0,(i,_))-> upd acc i (ff y) v0) (0,vs) (zip (M.elems vs) adj')
+              upd (chg, acc) i v v0 = if v /= v0 then (1, M.insert i v acc) else (max chg 0, acc)
               ff (v0,(_,a)) = minimum $ v0:(map ((+1).(q vs id)) a)
 
       solve = paths start
