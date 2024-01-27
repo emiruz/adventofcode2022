@@ -1,6 +1,6 @@
 #!/usr/bin/env runhaskell
 
-import Data.List(elemIndex)
+import Data.List(elemIndex,foldl')
 import Data.Char(ord)
 import Text.Printf (printf)
 import qualified Data.IntMap as M
@@ -28,8 +28,9 @@ main = do
       start = M.insert (1+ei 'E') 0 $ M.fromList $ zip [1..] $ replicate (n*m) 1000
 
       paths vs | vs' == vs = vs | otherwise = paths vs'
-        where vs' = M.fromList $ zip [1..] $ map ff adj'
-              ff (i,a) = minimum $ q' vs i:(map ((+1).(q vs id)) a)
+        where vs' = foldl' (\acc (i,a)-> upd acc i $ ff (i,a)) vs adj'
+              upd acc i (v0,v) = if v /= v0 then M.insert i v acc else acc
+              ff (i,a) = let v0 = q' vs i in (v0, minimum $ v0:(map ((+1).(q vs id)) a))
 
       solve = paths start
       part1 = maybe 0 id $ M.lookup (1+ei 'S') solve
