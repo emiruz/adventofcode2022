@@ -15,15 +15,10 @@ instance FromJSON P' where
 
 instance Ord P' where
   compare (Lit x) (Lit y) = compare x y
-  compare (P []) (P (_:_)) = LT
-  compare (P (_:_)) (P []) = GT
   compare x@(Lit _) ys = compare (P [x]) ys
   compare xs y@(Lit _) = compare xs (P [y])
-  compare (P (x:xs)) (P (y:ys))
-    | compare x y == EQ = compare (P xs) (P ys)
-    | otherwise = compare x y
-  compare _ _ = EQ
-
+  compare (P xs) (P ys) = compare xs ys
+  
 parse :: String -> P'
 parse x = maybe (P []) id $ decode $ pack x
 
