@@ -21,7 +21,7 @@ main = do
       span' (SpanRange (Bound a _) (Bound b _)) = b-a; span' _ = 0
       spans y = mergeRanges $ concat $ map (int y) ss
       part1 = sum $ map span' $ spans 2000000
-      y'   = length . takeWhile ((==1) . length) $ map spans $ [0..4000000]
-      idx = filter (\x -> case x of SpanRange _ _->True;_->False) $ invert $ spans y'
-      part2 = y' + 4000000 * (head $ fromRanges idx)
+      y' = length . takeWhile ((==1) . length) $ map spans $ [0..4000000]
+      x' = filter (\x -> case x of SpanRange _ _->True;_->False) $ invert $ spans y'
+      part2 = y' + 4000000 * (head $ fromRanges x')
   printf "Part 1: %d, Part 2: %d\n" part1 part2
