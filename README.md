@@ -35,3 +35,8 @@ modifications (0.7sec compiled with ghc -O2, ~10 sec
 interpreted). Its mostly held back by the large number
 of updates on an IntMap. Still one or two simple
 optimisations to add though.
+
+* Day 16: I took an unusual approach in an effort to
+minimise LOC. It takes around 5 minutes to run. In can
+probably be optimised further whilst maintaining similar
+LOC.
