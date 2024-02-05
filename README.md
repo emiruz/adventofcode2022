@@ -40,3 +40,6 @@ optimisations to add though.
 minimise LOC. It takes around 5 minutes to run. In can
 probably be optimised further whilst maintaining similar
 LOC.
+
+* Day 17: More LOC than I wanted, but could not see a way
+to make it substantially shorter. 
