@@ -43,3 +43,6 @@ LOC.
 
 * Day 17: More LOC than I wanted, but could not see a way
 to make it substantially shorter. 
+
+* Day 19: It takes 3m40sec to run when compiled, but it
+can be made much faster by adding more pruning heuristics.
