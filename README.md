@@ -47,6 +47,9 @@ to make it substantially shorter.
 * Day 19: It takes 3m40sec to run when compiled, but it
 can be made much faster by adding more pruning heuristics.
 
+* Day 21: More LOC than I wanted, because using algebraic
+types can require a lot of pattern matching.
+
 
 ## To do
 
