@@ -46,3 +46,22 @@ to make it substantially shorter.
 
 * Day 19: It takes 3m40sec to run when compiled, but it
 can be made much faster by adding more pruning heuristics.
+
+
+## To do
+
+* A better solution to Day 16 would be to return the best
+score and the valves used. Part 2 can be calculated
+sequentially: calculate for the first player, set the
+valve rates found to zero, contract the graph, calculate
+for the second player. It should result in a solution
+which is faster, possibly shorter, and less exotic all
+at once. Target 1s, 4s for part 1/2 respectively.
+
+* Day 19 needs an early stopping heuristic. It should be
+possible to calculate an upper bound final score for any
+blueprint analytically at any point during the search.
+If the current best solution exceeds the upper bound,
+early termination follows. Should result in an order
+of magnitude performance increase without more than a
+<=3 LOC added. Target 1s, 6s for part 1/2 respectively.
