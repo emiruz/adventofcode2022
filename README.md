@@ -36,10 +36,9 @@ interpreted). Its mostly held back by the large number
 of updates on an IntMap. Still one or two simple
 optimisations to add though.
 
-* Day 16: I took an unusual approach in an effort to
-minimise LOC. It takes around 5 minutes to run. In can
-probably be optimised further whilst maintaining similar
-LOC.
+* Day 16: Runs in 10 seconds compiled. Can be made faster
+still by threading caching through the code at the cost
+of complexity.
 
 * Day 17: More LOC than I wanted, but could not see a way
 to make it substantially shorter. 
@@ -52,14 +51,6 @@ types can require a lot of pattern matching.
 
 
 ## To do
-
-* A better solution to Day 16 would be to return the best
-score and the valves used. Part 2 can be calculated
-sequentially: calculate for the first player, set the
-valve rates found to zero, contract the graph, calculate
-for the second player. It should result in a solution
-which is faster, possibly shorter, and less exotic all
-at once. Target 1s, 4s for part 1/2 respectively.
 
 * Day 19 needs an early stopping heuristic. It should be
 possible to calculate an upper bound final score for any
