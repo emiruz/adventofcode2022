@@ -31,11 +31,14 @@ cabal install --lib lens regex-pcre containers \
 still by threading caching through the code at the cost
 of complexity.
 
-* Day 17: More LOC than I wanted, but could not see a way
-to make it substantially shorter. 
-
 * Day 19: Runs in 20 seconds compiled. Pruning heuristic
 is too pessimistic -- could be faster.
 
-* Day 21: More LOC than I wanted: using algebraic types
-can require a lot of pattern matching.
+* Day 22: Just part 1 completed, part 2 is coming later.
+
+
+## To do
+
+* Day 22: I'm struggling to implement part 2 in < 100 LOC.
+I'll come back to it at the end, once I figure out a way to 
+implement it more elegantly. Meanwhile, part 1 is available.
