@@ -82,4 +82,4 @@ main = do
       (a1,b1,_)      = to3D M.! (cubeWalk n p2Path)
       (a2,b2,_)      = to3D M.! (cubeWalk n $ init p2Path)
       part2          = 1000 *a1 + 4*b1 + (oIndex (a1-a2,b1-b2))
-  printf "Part 1: %d, Part 2: %d TBD\n" part1 part2
+  printf "Part 1: %d, Part 2: %d\n" part1 part2
