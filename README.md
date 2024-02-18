@@ -27,18 +27,16 @@ cabal install --lib lens regex-pcre containers \
 
 ## Notes
 
-* Day 16: Runs in 10 seconds compiled. Can be made faster
-still by threading caching through the code at the cost
-of complexity.
+* Day 16: Runs in 10s compiled. Can be made faster still 
+by threading caching through the code at the cost of
+complexity.
 
 * Day 19: Runs in 20 seconds compiled. Pruning heuristic
 is too pessimistic -- could be faster.
 
-* Day 22: Just part 1 completed, part 2 is coming later.
-
-
-## To do
-
-* Day 22: I'm struggling to implement part 2 in < 100 LOC.
-I'll come back to it at the end, once I figure out a way to 
-implement it more elegantly. Meanwhile, part 1 is available.
+* Day 22: General implementation without hard coding. 
+Runs in about 5m13s compiled. A 2-3 orders of magnitude
+speed improvement is possible: it needs a refactor.
+Orientation discovery in the final step is not fully
+general: if the last 2 steps feature a wrapping in 2D
+space, the answer would be wrong.
