@@ -3,23 +3,21 @@
 import Text.Regex.PCRE
 import Data.List(elemIndex)
 import Text.Printf(printf)
-import qualified Data.Set as S
 import qualified Data.Map.Strict as M
 import Data.Maybe(fromJust)
 
 oIndex :: (Int,Int) -> Int
 oIndex o = fromJust $ elemIndex o os where os = [(0,1),(1,0),(0,-1),(-1,0)]
 
-walk2D :: S.Set (Int, Int, Char) -> [Char] -> (Int, Int) -> (Int, Int) -> (Int, (Int, Int))
 walk2D coo (x':xs) o@(i,j) l@(a,b)
-  | elem x' "LR"             = walk2D coo xs ([(0,1),(1,0),(0,-1),(-1,0)] !! idx) l
-  | S.member (i',j','.') coo = walk2D coo xs o (i',j')
-  | otherwise                = walk2D coo xs o l
+  | elem x' "LR"           = walk2D coo xs ([(0,1),(1,0),(0,-1),(-1,0)] !! idx) l
+  | coo M.! (i',j') == '.' = walk2D coo xs o (i',j')
+  | otherwise              = walk2D coo xs o l
   where (i',j') = wrap
         idx = (oIndex o + (if x'=='R' then 1 else -1)) `mod` 4
-        row = [x | (x,y,_) <- S.toList coo, y == b]
-        col = [y | (x,y,_) <- S.toList coo, x == a]
-        wrap | any (\x-> S.member (a+i,b+j,x) coo) ".#" = (a+i,b+j)
+        row = [x | (x,y) <- M.keys coo, y == b]
+        col = [y | (x,y) <- M.keys coo, x == a]
+        wrap | M.member (a+i,b+j) coo = (a+i,b+j)
              | otherwise = [(a,minimum col),(minimum row,b),(a,maximum col),(maximum row,b)] !! oIndex (i,j)
 walk2D _ [] o l = (oIndex o, l)
 
@@ -74,9 +72,9 @@ main = do
   str <- getContents --readFile "input.txt"
   let (n, coo, ins)  = parse str
       first          = ((\(a,b,_)->(a,b)) $ head coo)
-      (face,(a',b')) = walk2D (S.fromList coo) ins (0,1) first
+      coo'           = M.fromList $ zip (map (\(a,b,_)->(a,b)) coo) $ map (\(_,_,c)->c) coo      
+      (face,(a',b')) = walk2D coo' ins (0,1) first
       part1          = 1000 * a' + 4 * b' + face
-      coo'           = M.fromList $ zip (map (\(a,b,_)->(a,b)) coo) $ map (\(_,_,c)->c) coo
       to3D           = M.fromList $ to3DMap n coo' [] [([], head coo)]
       p2Path         = walk3D n to3D ins (0,1) []
       (a1,b1,_)      = to3D M.! (cubeWalk n p2Path)
