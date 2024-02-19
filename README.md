@@ -34,9 +34,8 @@ complexity.
 * Day 19: Runs in 20 seconds compiled. Pruning heuristic
 is too pessimistic -- could be faster.
 
-* Day 22: General implementation without hard coding. 
-Runs in about 5m13s compiled. A 2-3 orders of magnitude
-speed improvement is possible: it needs a refactor.
-Orientation discovery in the final step is not fully
-general: if the last 2 steps feature a wrapping in 2D
-space, the answer would be wrong.
+* Day 22: General implementation (no hard-coding). Runs in
+2.5s. Orientation discovery assumes last instruction is a
+movement and last two movements do not wrap: easy to
+handle edge cases but tedious. This day was exceptionally
+fiddly.
