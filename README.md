@@ -22,7 +22,8 @@ Please install the following packages. They help to
 keep the code concise.
 ```
 cabal install --lib lens regex-pcre containers \
-                    bifunctors-5.6.1 aeson ranges
+                    bifunctors-5.6.1 aeson ranges \
+                    heaps
 ```
 
 ## Notes
