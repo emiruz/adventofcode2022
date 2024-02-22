@@ -4,7 +4,9 @@ The problems are solved in Haskell. I only had 2 weeks
 experience using the language prior to starting, so I
 learned a lot on the way. My main emphasis was on
 parsimonious code -- mostly using the standard library
--- and reasonable performance.
+-- and reasonable performance. The number of lines of
+code range from 11 to 69 with a mean average of about
+ 27.
 
 Each has a main function so that they can be compiled.
 Input is read via stdin. All solutions start with a
