@@ -1,9 +1,15 @@
 # Advent of code 2022
 
-The problems are solved in Haskell. Each has a main
-function so that they can be compiled. Input is read
-via stdin. All solutions start with a shebang so that
-they can be executed directly on Unix based systems.
+The problems are solved in Haskell. I only had 2 weeks
+experience using the language prior to starting, so I
+learned a lot on the way. My main emphasis was on
+parsimonious code -- mostly using the standard library
+-- and reasonable performance.
+
+Each has a main function so that they can be compiled.
+Input is read via stdin. All solutions start with a
+shebang so that they can be executed directly on Unix
+based systems.
 
 Interpreter executed example:
 ```
