@@ -3,15 +3,17 @@
 import Text.Regex.PCRE
 import Data.List(transpose)
 import Text.Printf(printf)
-import Control.Lens
 
 initStack :: String -> [String]
 initStack ls = filter (/=[]) $ map norm $ transpose (lines ls)
   where norm xs = [x | x <- xs, elem x ['A'..'Z']]
 
 move :: ([a] -> [a]) -> Int -> Int -> Int -> [[a]] -> [[a]]
-move f0 n f t s = s & ix (f-1) %~ snd . splitAt n 
-                  & ix (t-1) %~ (f0 (take n (s !! (f-1))) ++)
+move f0 n f t s = [ if i == f-1 then restF
+                    else if i == t-1 then f0 movedF ++ restT
+                    else x | (x, i) <- zip s [0..] ]
+  where (movedF, restF) = splitAt n (s !! (f-1))
+        restT = s !! (t-1)
 
 main :: IO ()
 main = do
