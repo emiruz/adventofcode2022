@@ -18,18 +18,18 @@ bfs m n start (a',b') bliz seen heap
   | S.member (t,a,b) seen = bfs m n start (a',b') bliz seen heap_
   | otherwise      = bfs m n start (a',b') bliz' (S.insert (t,a,b) seen) heap'
   where heap' = foldl (\h p@(x,y) -> H.insert (score p, (t+1,x,y)) h) heap_ moves
-        (xx@(_, (t,a,b)), heap_) = fromJust $ H.viewMin heap
+        ((_, (t,a,b)), heap_) = fromJust $ H.viewMin heap
         moves = filter (\p@(x,y)->p==start || p==(a',b') ||
                          ((not $ any (\(x',y',_)->(x,y)==(x',y')) bs) && x>1 && x<n && y>1 && y<m)) poss
         poss  = (a,b) : map (\(i,j)-> (a+i,b+j)) [(0,-1),(-1,0),(0,1),(1,0)]
         score (x,y) = t+1 + abs (a'-x) + abs (b'-y)
         (bs, bliz') = case M.lookup (t+1) bliz of
-          Just bs -> (bs, bliz)
+          Just v  -> (v, bliz)
           Nothing -> let v = map (evolve m n) (bliz M.! t) in (v, M.insert (t+1) v bliz)
 
 main :: IO ()
 main = do
-  str <- getContents -- readFile "input.txt"
+  str <- getContents --readFile "input.txt"
   let o     = M.fromList [('<',(0,-1)), ('^',(-1,0)), ('>',(0,1)), ('v',(1,0))]
       ls    = lines str
       cs    = [(i,j,v) | (i,r)<-zip [1..] ls,(j,v)<-zip [1..] r]
