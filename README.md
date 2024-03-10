@@ -20,7 +20,7 @@ cat input.txt | ./01.hs
 
 Compiled and then executed:
 ```
-ghc 01.hs
+ghc -O2 01.hs
 cat input.txt | ./01
 ```
 
@@ -29,9 +29,8 @@ cat input.txt | ./01
 Please install the following packages. They help to
 keep the code concise.
 ```
-cabal install --lib regex-pcre containers \
+cabal install --lib regex-pcre containers heaps \
                     bifunctors-5.6.1 aeson ranges \
-                    heaps
 ```
 
 ## Notes
