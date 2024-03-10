@@ -2,11 +2,9 @@
 
 import Text.Regex.PCRE
 import Text.Printf(printf)
-import Data.List(nubBy,foldl',intersect,sort)
 import Data.Ord (comparing)
 import Data.List (maximumBy)
 import qualified Data.Map.Strict as M
-import qualified Data.Set as S
 
 type Graph = M.Map String (Int, M.Map String Int) 
 
@@ -37,7 +35,7 @@ main :: IO ()
 main = do
   str <- getContents --readFile "input.txt"
   let ns  = M.fromList $ map parse $ lines str
-      ns' = foldl' (\a x-> contract a x) ns [k | (k,(r,_))<-M.toList ns,r==0 && k/="AA"]
+      ns' = foldl (\a x-> contract a x) ns [k | (k,(r,_))<-M.toList ns,r==0 && k/="AA"]
       (p2_1, ex) = dfs ns' "AA" [] 26
-      (p2_2, _)  = dfs (foldl' (\a x-> contract a x) ns' ex) "AA" [] 26
+      (p2_2, _)  = dfs (foldl (\a x-> contract a x) ns' ex) "AA" [] 26
   printf "Part 1: %d, Part 2: %d\n" (fst $ dfs ns' "AA" [] 30) (p2_1+p2_2)
